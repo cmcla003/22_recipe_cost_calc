@@ -15,21 +15,18 @@ def yes_no(question):
 # set up list
 ingredient_list = []
 # loop ingredient ask until exit code
-ready = input("Are you ready to enter your ingredients? ")
-if ready == "yes":
-    ingredient =""
-    while ingredient != "xxx":
 
-        ingredient = input("Please enter the ingredient: ").strip().lower()
-        if ingredient == "xxx":
-            if len(ingredient_list) <= 1:
-                print("Please enter more than 1 ingredient")
+ingredient = ""
+while ingredient != "xxx":
 
-        if ingredient in ingredient_list:
-            print("You have already entered this ingredient, Please enter another")
+    ingredient = input("Please enter the ingredient: ").strip().lower()
 
-        elif ingredient !="xxx":
-            ingredient_list.append(ingredient)
+    if ingredient in ingredient_list:
+        print("You have already entered this ingredient, Please enter another")
 
+    if ingredient != "xxx":
+        ingredient_list.append(ingredient)
+    else:
+        break
 
 print(ingredient_list)
