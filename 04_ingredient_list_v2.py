@@ -1,27 +1,36 @@
-def not_blank(question):
+
+#not blank and checks for digit user entry
+def not_blank(question,number_ok):
+    error = "Cannot be blank"
+    digi_error = "Cannot have numbers"
     valid = False
     while not valid:
         # ask user for entry and assesses if not blank
         response = input(question).strip().lower()
-        for letter in response:
-            if letter.isdigit() == True:
-                print("Entry cannot have numbers please try again")
+        has_errors = ""
 
-        if response != "":
+        if number_ok != "yes":
+            for letter in response:
+                if letter.isdigit() == True:
+                    has_errors = "yes"
+                    break
+
+        if response == "":
+            print(error)
+            continue
+        if has_errors != "":
+            print(digi_error)
+        else:
             return response
             valid = True
 
-        else:
-            print("Entry cannot be blank")
 
 ingredient_list=[]
 
 ingredient = ""
 while ingredient != "xxx":
-    num_ingredients = 0
 
-    ingredient = not_blank("Please enter the ingredient: ").strip().lower()
-    num_ingredients +=1
+    ingredient = not_blank("Please enter the ingredient: ","no")
 
     if ingredient in ingredient_list:
         print("You have already entered this ingredient, Please enter another")
