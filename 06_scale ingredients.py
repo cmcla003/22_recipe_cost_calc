@@ -39,7 +39,7 @@ def num_check(question):
             print(error)
 
 # scale factor to be rpelaced with scale once completed
-scale_factor = float(input("Scale factor: "))
+scale_factor = eval(input("Scale factor: "))
 
 ingredient_list=[]
 
@@ -60,6 +60,10 @@ while stop != "xxx":
         #convert to int if whole number
         if scaled % 1 == 0:
             scaled = round(scaled)
+        elif scaled * 10 % 1 == 0:
+            scaled ="{:.1f}".format(scaled)
+        else:
+            scaled = "{:.2f}".format(scaled)
 
         ingredient_list.append([ingredient,amount,scaled])
 
