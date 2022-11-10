@@ -45,7 +45,7 @@ ingredient_list=[]
 
 stop= ""
 while stop != "xxx":
-    ingredient = not_blank("Please enter the ingredient: ","yes")
+    ingredient = not_blank("Please enter the ingredient: ","no")
 
     if ingredient == "xxx" and len(ingredient_list)>=2:
         break
@@ -56,6 +56,13 @@ while stop != "xxx":
     else:
         amount = num_check("How much? ")
         scaled = amount * scale_factor
+
+        #convert to int if whole number
+        if scaled % 1 == 0:
+            scaled = round(scaled)
+
         ingredient_list.append([ingredient,amount,scaled])
 
-print(ingredient_list)
+# print list unit then ingredient
+for item in ingredient_list:
+    print(item[2],item[0])
