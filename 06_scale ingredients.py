@@ -57,7 +57,7 @@ while stop != "xxx":
         amount = num_check("How much? ")
         scaled = amount * scale_factor
 
-        #convert to int if whole number
+        # rounding
         if scaled % 1 == 0:
             scaled = round(scaled)
         elif scaled * 10 % 1 == 0:
