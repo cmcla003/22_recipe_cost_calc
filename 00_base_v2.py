@@ -74,7 +74,6 @@ Do you want to keep going? Yes/No""").strip().lower()
 stop= ""
 while stop != "xxx":
     ingredient = not_blank("Please enter the ingredient: ","yes")
-
     if ingredient == "xxx" and len(ingredient_list)>=2:
         break
     elif ingredient == "xxx" and len(ingredient_list)<2:
@@ -83,7 +82,7 @@ while stop != "xxx":
         print("You have already entered this ingredient, Please enter another")
     else:
         amount = num_check("How much? ")
-        amount = amount * scale_factor
-        ingredient_list.append("{:.2f} units of {}".format(amount,ingredient))
+        scaled = amount * scale_factor
+        ingredient_list.append([ingredient,amount,scaled])
 
 print(ingredient_list)
