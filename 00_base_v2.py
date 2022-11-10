@@ -82,7 +82,7 @@ while stop != "xxx":
         print("You have already entered this ingredient, Please enter another")
     else:
         amount = num_check("How much? ")
-        scaled = amount * scale_factor
+        amount = amount * scale_factor
         ingredient_list.append([ingredient,amount,scaled])
 
 print(ingredient_list)
