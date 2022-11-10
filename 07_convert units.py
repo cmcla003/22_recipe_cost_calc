@@ -25,33 +25,20 @@ def not_blank(question,number_ok):
 
 
 # dictionary with conversion values for common units
-unit_dict={'kg': 1000, 'pound':450, 'ounce':30, 'grams':1,
-                'teaspoon': 4.92, 'tablespoon': 14.7,
-                'cup': 128,
-                'litre': 1000, 'quart':946.35, 'pint':473.17 ,'ml': 1}
+unit_dict={'teaspoon': 5, 'tablespoon': 15,
+           'cup': 237,'gram':1,'litre': 1000 ,'ml': 1}
 
-# list of abbreviations
-valid_units = [["kg","kilo","kilogram"],["lb","lbs", "pound"],["oz","ounce"],
-               ["g", "gm", "grams"],["t", "tsp", "teaspoon"],["T","tbsp","tablespoon",],
-               ["C","c","cup"],["l", "L", "litre"],["qt","quart"],["pt","pint"],["mls", "millilitre","ml"]]
+valid = False
+while not valid:
+    amount = eval(input("How much? "))
+    amount = float(amount)
 
-recipe_units = []
+    unit = input("Unit? ")
+    if unit in unit_dict:
+        multiply_unit = unit_dict.get(unit)
+        amount = amount * multiply_unit
+        print("Amount in ml {}".format(amount))
 
-unit = ""
-while unit != "xxx":
-
-    unit = not_blank("Please enter a unit of measurement: ","no")
-
-    if unit == "xxx":
-        break
     else:
-        recipe_units.append(unit)
-
-
-
-print(recipe_units)
-
-
-
-
+        print("{} is unchanged".format(unit))
 
