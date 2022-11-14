@@ -119,7 +119,8 @@ Do you want to keep going? Yes/No """)
         if sf_ok == "yes":
             break
     else:
-        print("Scale factor: {}".format(scale_factor))
+        print("Scale factor: {:.2f}".format(scale_factor))
+        break
 
 # ingredient, unit and amount
 ingredient_list=[]
