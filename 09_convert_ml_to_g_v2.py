@@ -1,4 +1,4 @@
-import csv
+# not blank and checks for digit user entry
 def not_blank(question,number_ok):
     error = "Cannot be blank"
     digi_error = "Cannot have numbers"
@@ -23,6 +23,23 @@ def not_blank(question,number_ok):
             return response
             valid = True
 
+# number check
+def num_check(question):
+    error= "Please enter a number more than 0"
+
+    valid = False
+    while not valid:
+        try:
+            response = eval(input(question))
+
+            if response <= 0:
+                print(error)
+            else:
+                return response
+        except ValueError:
+            print(error)
+
+# check unit valid if not leave unchanged
 def unit_check():
     unit_to_check = not_blank("Unit: ","no")
 
@@ -50,43 +67,42 @@ def unit_check():
 
     return unit
 
-def general_converter(how_much, lookup,dictionary,conversion_factor):
+def convert_to_ml():
+    if unit in unit_convert_ml:
+        multiply_unit = unit_convert_ml.get(unit)
+        converted_amount = amount * multiply_unit
 
+    else:
+        converted_amount = amount * 1
+
+    return converted_amount
+
+
+def general_converter(how_much,lookup,dictionary, conversion_factor):
     if lookup in dictionary:
-        multiply_unit = dictionary.get(unit)
-        how_much = how_much * multiply_unit * conversion_factor
+        multiply_by = dictionary.get(unit)
+        how_much = how_much * float(multiply_by) * conversion_factor
 
     return how_much
 
-# main routine
-
-# dictionary for ml to g ingredients
-# open file, read data into list convert to dictionary
-groceries = open('01_ingredients_ml_to_g.csv')
-csv_groceries = csv.reader(groceries)
-food_dict={}
-for row in csv_groceries:
-    food_dict[row[0]] = row[1]
+# *** main routine ***
 
 # dictionary with conversion values for common units
 unit_convert_ml={'tsp': 5, 'tbsp': 15,
            'C': 237,'g':1,'L': 1000 ,'ml': 1}
 
-keep_going=""
-while keep_going =="":
-    ingredient = input("Ingredient: ").lower().strip()
+recipe_unit_amount = []
 
-    amount=eval(input("How much: "))
+keep_going = ""
+while keep_going != "xxx":
+
+    amount = eval(input("How much? "))
     amount = float(amount)
-    # check unit valid
     unit = unit_check()
-    # convert unit to ml
-    amount = general_converter(amount, unit, unit_convert_ml,1)
-    print("{} ml".format(amount))
-    #convert unit from ml to g
-    ingredient = general_converter(amount,ml, food_dict,250)
-    print("{} g".format(ingredient))
+
+    amount = general_converter(amount, unit,unit_convert_ml,1)
+    recipe_unit_amount.append([amount,unit])
 
 
-
+    print("**{} ml is {} {}".format(recipe_unit_amount,amount,unit))
 
