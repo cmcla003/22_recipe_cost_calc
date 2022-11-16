@@ -75,7 +75,7 @@ def general_converter(how_much,lookup,dictionary, conversion_factor):
         converted = "yes"
     else:
         converted = "no"
-    return how_much
+    return [how_much,converted]
 
 # *** main routine ***
 
@@ -93,7 +93,7 @@ for row in csv_groceries:
     food_dict[row[0]] = row[1]
 
 
-converted_units_ml = []
+converted_units = []
 
 keep_going = ""
 while keep_going == "":
@@ -103,8 +103,18 @@ while keep_going == "":
     given_unit = unit_check()
     ingredient = input("Ingredient: ")
 
-    converted_amount = general_converter(unit_amount, given_unit,unit_convert_ml,1)
-    converted_units_ml.append([converted_amount,unit_amount,given_unit])
-    print(converted_units_ml)
+    amount_to_ml = general_converter(unit_amount, given_unit,unit_convert_ml,1)
+
+    if amount_to_ml[1]== "yes":
+        amount_to_g = general_converter(amount_to_ml[0],ingredient,food_dict,250)
+        unit="ml"
+        if amount_to_g[1]=="yes":
+            unit = "g"
+            converted_units.append([amount_to_g[0],unit])
+    
+    else:
+        converted_units.append([amount_to_ml[0]])
+
+    print(converted_units)
 
 
