@@ -1,3 +1,5 @@
+# works out unit cost
+
 # not blank and checks for digit user entry
 def not_blank(question,number_ok):
     error = "Cannot be blank"
